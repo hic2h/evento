@@ -1,0 +1,22 @@
+<nz-carousel nzAutoPlay class="container">
+  <div nz-carousel-content *ngFor="let event of featuredEvents">
+    <div class="slider-item-container">
+      <img [alt]="event.title" [src]="event.coverImage" class="cover-image" />
+      <div class="slider-text">
+        <a [routerLink]="['/events', event.id]">
+          <h3 class="title">{{ event.title | slice: 0:30 }}</h3>
+        </a>
+        <h4 class="sub-details">{{ event.description | slice: 0:100 }}</h4>
+        <h4 class="sub-details">
+          <i nz-icon nzType="calendar"></i>
+          {{ event.period.startDate | date: "medium" }}
+        </h4>
+        <h4 class="sub-details">
+          <i nz-icon nzType="environment" nzTheme="outline"></i>
+          {{ event.address | slice: 0:30 }}
+          {{ event.address?.length > 30 ? "..." : "" }}
+        </h4>
+      </div>
+    </div>
+  </div>
+</nz-carousel>

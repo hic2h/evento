@@ -1,0 +1,12 @@
+<h2>Search Results</h2>
+<div nz-row nzGutter="16">
+  <div
+    nz-col
+    nzSm="24"
+    nzLg="8"
+    *ngFor="let event of events$ | async"
+    class="items-margin"
+  >
+    <app-event-card [event]="event"></app-event-card>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+.container {
+  background: #364d79;
+
+  .slider-item-container {
+    position: relative;
+    text-align: center;
+    color: white;
+
+    height: auto;
+    width: 100%;
+    justify-content: center;
+
+    .cover-image {
+      width: 100%;
+    }
+
+    .slider-text {
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      text-align: left;
+
+      .title {
+        font-size: 2.8em;
+        color: #fff;
+        text-shadow: 3px 4px 8px black;
+      }
+
+      .sub-details {
+        font-size: 1.2em;
+        color: #fff;
+        text-shadow: 3px 4px 8px black;
+      }
+    }
+  }
+}
+
+[nz-carousel-content] {
+  overflow: hidden;
+}

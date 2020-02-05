@@ -1,0 +1,61 @@
+<!--Featured Events-->
+<div nz-row>
+  <h2>Featured Events</h2>
+  <div nz-row class="items-margin featured-container">
+    <app-featured-events
+      [featuredEvents]="featuredEvents$ | async | slice: 0:eventsPerPage"
+    ></app-featured-events>
+  </div>
+</div>
+
+<!--Upcoming Events-->
+
+<div nz-row>
+  <div nz-row>
+    <h2 nz-col nzSpan="12">Upcoming Events</h2>
+    <h2 nz-col align="right" nzSpan="12">
+      <a
+        [routerLink]="['/events/search']"
+        [queryParams]="{ eventTime: eventTime.Upcoming }"
+        >All Upcoming Events</a
+      >
+    </h2>
+  </div>
+  <div nz-row nzGutter="16">
+    <div
+      nz-col
+      nzSm="24"
+      nzLg="8"
+      class="items-margin"
+      *ngFor="let event of upcomingEvents$ | async | slice: 0:eventsPerPage"
+    >
+      <app-event-card [event]="event"></app-event-card>
+    </div>
+  </div>
+</div>
+
+<!--Past Events-->
+
+<div nz-row>
+  <div nz-row>
+    <h2 nz-col nzSpan="12">Past Events</h2>
+    <h2 nz-col align="right" nzSpan="12">
+      <a
+        [routerLink]="['/events/search']"
+        [queryParams]="{ eventTime: eventTime.Past }"
+        >All Past Events</a
+      >
+    </h2>
+  </div>
+  <div nz-row nzGutter="16">
+    <div
+      nz-col
+      nzSm="24"
+      nzLg="8"
+      *ngFor="let event of pastEvents$ | async"
+      class="items-margin"
+    >
+      <app-event-card [event]="event"></app-event-card>
+    </div>
+  </div>
+</div>

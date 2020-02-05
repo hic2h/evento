@@ -1,0 +1,47 @@
+<nz-card [nzCover]="coverImage" [nzActions]="[actionEdit, actionDelete]">
+  <article nz-row nz-typography>
+    <div nz-col nzSm="24" nzLg="18">
+      <h3 nz-title>{{ event?.title }}</h3>
+      <p nz-text nzType="secondary">Category: {{ event?.category }}</p>
+      <p nz-text nzType="secondary">
+        {{ event?.period.startDate | date: "medium" }} -
+        {{ event?.period.endDate | date: "medium" }}
+      </p>
+      <p nz-text nzType="secondary">Location: {{ event?.address }}</p>
+    </div>
+    <div nz-col nzSm="24" nzLg="6">
+      <h3 nz-title>
+        {{ event?.price > 0 ? (event?.price | currency) : "Free" }}
+      </h3>
+      <p nz-text nzType="secondary">Hosted By: {{ event?.host }}</p>
+    </div>
+
+    <nz-divider></nz-divider>
+
+    <h3 nz-title>Description</h3>
+    <p nz-paragraph style="text-align: justify;">{{ event?.description }}</p>
+  </article>
+</nz-card>
+
+<ng-template #coverImage>
+  <img
+    [alt]="event?.title"
+    [src]="event?.coverImage"
+    style="max-height: 50vh"
+  />
+</ng-template>
+<ng-template #actionEdit>
+  <i nz-icon nzType="edit" [routerLink]="['/events', event?.id, 'edit']"></i>
+</ng-template>
+<ng-template #actionDelete>
+  <i
+    nz-icon
+    [nzTheme]="'twotone'"
+    [nzTwotoneColor]="'red'"
+    nzType="delete"
+    nz-popconfirm
+    nzPopconfirmTitle="Are you sure delete this Event?"
+    nzPopconfirmPlacement="top"
+    (nzOnConfirm)="deleteEvent(event?.id)"
+  ></i>
+</ng-template>

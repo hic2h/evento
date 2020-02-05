@@ -1,0 +1,30 @@
+<nz-empty
+  *ngIf="!image"
+  [nzNotFoundContent]="contentTpl"
+  [nzNotFoundFooter]="footerTpl"
+>
+  <ng-template #contentTpl>
+    <span>
+      No image have been uploaded! Click the button below to upload new one.
+    </span>
+  </ng-template>
+  <ng-template #footerTpl>
+    <nz-upload
+      [nzCustomRequest]="uploadImageReq"
+      [nzHeaders]="setMediaUploadHeaders"
+    >
+      <button nz-button>
+        <i nz-icon nzType="upload"></i><span>Upload Image</span>
+      </button>
+    </nz-upload>
+  </ng-template>
+</nz-empty>
+
+<div class="event-image" *ngIf="image">
+  <img [src]="image" />
+  <div class="delete-icon">
+    <button nz-button nzType="danger" nzShape="circle" (click)="deleteImage()">
+      <i nz-icon nzType="delete"></i>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<nz-card
+  [nzCover]="coverTemplate"
+  nzHoverable
+  [routerLink]="['/events/', event.id]"
+>
+  <nz-card-meta
+    [nzTitle]="event.title | slice: 0:30"
+    [nzDescription]="event.description | slice: 0:50"
+  ></nz-card-meta>
+  <nz-divider></nz-divider>
+  <nz-row [nzGutter]="16">
+    <nz-col [nzSpan]="16">
+      <nz-statistic
+        [nzValue]="event.period.startDate | date: 'M/d/yy, hh:mm'"
+        [nzTitle]="'Date'"
+      ></nz-statistic>
+    </nz-col>
+    <nz-col [nzSpan]="8">
+      <nz-statistic
+        [nzValue]="event.price > 0 ? (event.price | currency) : 'Free'"
+        [nzTitle]="'Price'"
+      ></nz-statistic>
+    </nz-col>
+  </nz-row>
+</nz-card>
+
+<ng-template #coverTemplate>
+  <img [alt]="event.title" [src]="event.coverImage" style="height: 40vh;" />
+</ng-template>
