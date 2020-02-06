@@ -18,7 +18,7 @@ export class EditEventPageComponent implements OnInit {
   eventId: string;
   constructor(
     private route: ActivatedRoute,
-    private store: Store<fromEvent.State>
+    private store: Store<fromEvent.EventState>
   ) {}
 
   ngOnInit() {

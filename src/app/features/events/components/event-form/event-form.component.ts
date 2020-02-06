@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { CategoryService } from "@core/category.service";
 import { PlacesService } from "@core/places.service";
 import { Observable } from "rxjs";
+import { validateEventPeriod } from "../../validators/validate-event-period.validator";
 
 @Component({
   selector: "app-event-form",
@@ -42,13 +43,18 @@ export class EventFormComponent implements OnInit, OnChanges {
       category: [event.category, [Validators.required]],
       coverImage: [event.coverImage, [Validators.required]],
       featured: [event.featured, [Validators.required]],
-      price: [event.price, [Validators.required]],
+      price: [event.price],
       host: [event.host, [Validators.required]],
       address: [event.address, [Validators.required]],
-      period: this.fb.group({
-        startDate: [event.period.startDate.toString(), [Validators.required]],
-        endDate: [event.period.endDate.toString(), [Validators.required]]
-      })
+      period: this.fb.group(
+        {
+          startDate: [event.period.startDate.toString()],
+          endDate: [event.period.endDate.toString()]
+        },
+        {
+          validator: validateEventPeriod()
+        }
+      )
     });
   }
 
@@ -87,6 +93,18 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
 
   onSubmitForm(): void {
-    this.submitForm.emit(this.eventForm.value);
+    /**
+     * Validate all form controllers, If a controller is not valid, an error message will appears bellow the input field
+     */
+    for (const i in this.eventForm.controls) {
+      this.eventForm.controls[i].markAsDirty();
+      this.eventForm.controls[i].updateValueAndValidity();
+    }
+    /**
+     * Submit the form only if it is valid
+     */
+    if (this.eventForm.valid) {
+      this.submitForm.emit(this.eventForm.value);
+    }
   }
 }

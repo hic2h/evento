@@ -17,7 +17,7 @@ export class SearchPageComponent implements OnInit {
   events$: Observable<EventDetails[]>;
   constructor(
     private route: ActivatedRoute,
-    private store: Store<fromEvent.State>
+    private store: Store<fromEvent.EventState>
   ) {}
 
   ngOnInit() {

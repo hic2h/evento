@@ -17,7 +17,7 @@ export class AllEventsComponent implements OnInit {
   upcomingEvents$: Observable<EventDetails[]>;
   pastEvents$: Observable<EventDetails[]>;
   public eventTime = EventTime;
-  constructor(private store: Store<fromEvent.State>) {}
+  constructor(private store: Store<fromEvent.EventState>) {}
 
   ngOnInit() {
     this.featuredEvents$ = this.store.select(selectors.selectFeaturedEvents);

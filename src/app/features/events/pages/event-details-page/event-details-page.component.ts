@@ -17,7 +17,7 @@ export class EventDetailsPageComponent implements AfterContentInit {
   eventDetails$: Observable<EventDetails>;
   constructor(
     private route: ActivatedRoute,
-    private store: Store<fromEvent.State>
+    private store: Store<fromEvent.EventState>
   ) {}
 
   ngAfterContentInit() {

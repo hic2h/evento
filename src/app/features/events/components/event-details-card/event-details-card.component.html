@@ -1,7 +1,7 @@
 <nz-card [nzCover]="coverImage" [nzActions]="[actionEdit, actionDelete]">
   <article nz-row nz-typography>
     <div nz-col nzSm="24" nzLg="18">
-      <h3 nz-title>{{ event?.title }}</h3>
+      <h3 nz-title class="title">{{ event?.title }}</h3>
       <p nz-text nzType="secondary">Category: {{ event?.category }}</p>
       <p nz-text nzType="secondary">
         {{ event?.period.startDate | date: "medium" }} -

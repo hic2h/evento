@@ -10,7 +10,7 @@ import * as actions from "@core/events/event.actions";
   styleUrls: ["./create-event-page.component.scss"]
 })
 export class CreateEventPageComponent implements OnInit {
-  constructor(private store: Store<fromEvent.State>) {}
+  constructor(private store: Store<fromEvent.EventState>) {}
 
   ngOnInit(): void {}
 

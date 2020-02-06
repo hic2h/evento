@@ -6,45 +6,66 @@
           <div nz-row nzGutter="16">
             <nz-form-item nz-col nzSm="24" nzLg="12">
               <nz-form-label nzRequired>Title</nz-form-label>
-              <input
-                nz-input
-                placeholder="Event Title"
-                formControlName="title"
-              />
+              <nz-form-control [nzErrorTip]="titleErrorTpl">
+                <input
+                  nz-input
+                  placeholder="Event Title"
+                  formControlName="title"
+                />
+                <ng-template #titleErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Event title is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
             </nz-form-item>
             <nz-form-item nz-col nzSm="24" nzLg="12">
               <nz-form-label nzRequired>Category</nz-form-label>
-              <nz-select
-                nzPlaceHolder="Select Event Category"
-                formControlName="category"
-              >
-                <nz-option
-                  *ngFor="let category of categories$ | async"
-                  [nzLabel]="category"
-                  [nzValue]="category"
-                ></nz-option>
-              </nz-select>
+              <nz-form-control [nzErrorTip]="categoryErrorTpl">
+                <nz-select
+                  nzPlaceHolder="Select Event Category"
+                  formControlName="category"
+                >
+                  <nz-option
+                    *ngFor="let category of categories$ | async"
+                    [nzLabel]="category"
+                    [nzValue]="category"
+                  ></nz-option>
+                </nz-select>
+                <ng-template #categoryErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Event category is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
             </nz-form-item>
           </div>
           <div nz-row>
             <nz-form-item nz-col nzLg="24">
               <nz-form-label nzRequired>Address</nz-form-label>
-              <input
-                #addressInput
-                nz-input
-                placeholder="Event Address"
-                formControlName="address"
-                [nzAutocomplete]="auto"
-                (input)="onPlacesSearch($event.target?.value)"
-              />
-              <nz-autocomplete nzBackfill #auto>
-                <nz-auto-option
-                  *ngFor="let place of places$ | async"
-                  [nzValue]="place"
-                >
-                  {{ place }}
-                </nz-auto-option>
-              </nz-autocomplete>
+              <nz-form-control [nzErrorTip]="addressErrorTpl">
+                <input
+                  #addressInput
+                  nz-input
+                  placeholder="Event Address"
+                  formControlName="address"
+                  [nzAutocomplete]="auto"
+                  (input)="onPlacesSearch($event.target?.value)"
+                />
+                <nz-autocomplete nzBackfill #auto>
+                  <nz-auto-option
+                    *ngFor="let place of places$ | async"
+                    [nzValue]="place"
+                  >
+                    {{ place }}
+                  </nz-auto-option>
+                </nz-autocomplete>
+                <ng-template #addressErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Event address is required
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
             </nz-form-item>
           </div>
         </div>
@@ -60,49 +81,74 @@
     </div>
     <div nz-row nzGutter="16">
       <div nz-col nzSm="24" nzLg="14">
-        <nz-form-item nz-row>
-          <nz-form-label nzRequired>Description</nz-form-label>
-          <textarea
-            rows="4"
-            nz-input
-            formControlName="description"
-            placeholder="Event Description"
-          ></textarea>
+        <div>
+          <nz-form-item nz-row>
+            <nz-form-label nzRequired>Description</nz-form-label>
+            <nz-form-control [nzErrorTip]="descriptionErrorTpl">
+              <textarea
+                rows="4"
+                nz-input
+                formControlName="description"
+                placeholder="Event Description"
+              ></textarea>
+              <ng-template #descriptionErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Event description is required
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
           <div nz-row>
             <nz-form-item nz-col nzSm="24" nzLg="12">
-              <nz-form-label nzRequired>Start Date</nz-form-label>
-              <nz-date-picker
-                nzShowTime
-                nzFormat="yyyy-MM-dd HH:mm:ss"
-                nzPlaceHolder="Select Time"
-                [ngModel]="event?.period.startDate"
-                [ngModelOptions]="{ standalone: true }"
-                (ngModelChange)="onStartDate($event)"
-                (nzOnOk)="onStartDate($event)"
-              ></nz-date-picker>
+              <nz-form-label>Start Date</nz-form-label>
+              <nz-form-control>
+                <nz-date-picker
+                  nzShowTime
+                  nzFormat="yyyy-MM-dd HH:mm:ss"
+                  nzPlaceHolder="Select Time"
+                  [ngModel]="event?.period.startDate"
+                  [ngModelOptions]="{ standalone: true }"
+                  (ngModelChange)="onStartDate($event)"
+                  (nzOnOk)="onStartDate($event)"
+                ></nz-date-picker>
+              </nz-form-control>
             </nz-form-item>
             <nz-form-item nz-col nzSm="24" nzLg="12">
-              <nz-form-label nzRequired>End Date</nz-form-label>
-              <nz-date-picker
-                nzShowTime
-                nzFormat="yyyy-MM-dd HH:mm:ss"
-                nzPlaceHolder="Select Time"
-                [ngModel]="event?.period.endDate"
-                [ngModelOptions]="{ standalone: true }"
-                (ngModelChange)="onEndDate($event)"
-                (nzOnOk)="onEndDate($event)"
-              ></nz-date-picker>
+              <nz-form-label>End Date</nz-form-label>
+              <nz-form-control [nzErrorTip]="periodErrorTpl">
+                <nz-date-picker
+                  nzShowTime
+                  nzFormat="yyyy-MM-dd HH:mm:ss"
+                  nzPlaceHolder="Select Time"
+                  [ngModel]="event?.period.endDate"
+                  [ngModelOptions]="{ standalone: true }"
+                  (ngModelChange)="onEndDate($event)"
+                  (nzOnOk)="onEndDate($event)"
+                ></nz-date-picker>
+                <ng-template #periodErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('invalidPeriod')">
+                    End Date should be later than the Start Date
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
             </nz-form-item>
           </div>
-        </nz-form-item>
+        </div>
       </div>
       <div nz-col nzSm="24" nzLg="10">
         <nz-form-item nz-row>
           <nz-form-label nzRequired>Host</nz-form-label>
-          <input nz-input placeholder="Event Host" formControlName="host" />
+          <nz-form-control [nzErrorTip]="hostErrorTpl">
+            <input nz-input placeholder="Event Host" formControlName="host" />
+            <ng-template #hostErrorTpl let-control>
+              <ng-container *ngIf="control.hasError('required')">
+                Host name is required
+              </ng-container>
+            </ng-template>
+          </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row>
-          <nz-form-label nzRequired>
+          <nz-form-label>
             Price
           </nz-form-label>
           <nz-input-group nzPrefix="$">
@@ -129,7 +175,6 @@
       <nz-form-control style="text-align: right;">
         <button
           nz-button
-          [disabled]="eventForm.invalid"
           nzSize="large"
           nzType="primary"
           (click)="onSubmitForm()"
