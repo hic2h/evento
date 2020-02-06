@@ -1,27 +1,44 @@
 # Evento
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.10.
+An simple admin panel for events management, that provides the basic functionalities to QUERY, ADD, UPDATE and DELETE events.
+
+## Stack
+
+- Angular
+- Ngrx @ngrx/effects, and [@ngrx/entity](https://ngrx.io/guide/entity)
+- Ant Design for [Angular](https://ng.ant.design/)
+- Firebase
+
+## Files and folders structure
+
+The overall architecture is based on 4 main sections/modules:
+
+### 1 - The Core module
+
+This module is for singleton classes used by all modules, such as route guards, HTTP interceptors, and application level services (logging, error handlers).
+
+The Core module contains also business logic for each feature including the declaration of the feature entities, the state management and the API requests
+
+### 2 - The Blocks module
+
+This module contains page-level components of content such as a common footer, navigation, and header.
+
+### 3 - The Shared module
+
+The shared module contains classes and resources which are used in more than one dynamically loaded module.
+
+### 4 - The Features modules
+
+This modules represent the Presentation layer of the App, it contains a collection of modules which are independent of each other.
+Each sub-folder of this module is an independent and lazily loaded feature.
+Each Feature contains it own routing logic, and it does not contain any business logic.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run the ng app (dev mode) `npm start`
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+run `npm run test`
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Unit tests executed using [Karma](https://karma-runner.github.io).

@@ -1,16 +1,11 @@
 <nz-layout class="layout-container">
   <nz-header>
-    <div class="logo">
-      <span>Evento</span>
-    </div>
+    <a class="logo" [routerLink]="['/events']">
+      <img src="../../../../assets/images/logo.png" height="75" />
+    </a>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" class="header-menu">
-      <button
-        nz-button
-        nzType="primary"
-        nzSize="large"
-        [routerLink]="['/events/create']"
-      >
-        <i nz-icon nzType="plus"></i>Create New Event
+      <button nz-button nzType="primary" [routerLink]="['/events/create']">
+        <i nz-icon nzType="plus"></i> New Event
       </button>
     </ul>
   </nz-header>
